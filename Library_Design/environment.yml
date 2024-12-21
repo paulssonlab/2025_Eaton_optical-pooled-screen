@@ -1,0 +1,32 @@
+name: marlin_libraries
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - biopython
+  - black
+  - dask
+  - dask-jobqueue
+  - distributed
+  - dna_features_viewer
+  - jupyterlab
+  - jupyterlab_code_formatter
+  - matplotlib
+  - minimap2
+  - nodejs
+  - numpy
+  - openssl
+  - pandas
+  - pathlib
+  - pip
+  - pip:
+      - pySmartDL
+      - pyhmmer
+  - pre-commit
+  - pydna
+  - python=3.11
+  - samtools
+  - scikit-learn
+  - seaborn
+  - treetime

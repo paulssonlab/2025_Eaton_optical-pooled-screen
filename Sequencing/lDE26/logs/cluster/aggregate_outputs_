@@ -1,0 +1,19 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_outputs
+	1
+
+[Tue Sep 17 13:58:19 2024]
+rule aggregate_outputs:
+    input: /home/de64/scratch/de64/2023-03-10_lDE26_Nanopore_TestRun/output_subsample=0.tsv
+    output: /home/de64/scratch/de64/2023-03-10_lDE26_Nanopore_TestRun/output.tsv
+    jobid: 0
+    resources: partition=short, time=120, mem=16000, cpus=1, ntasks=1, optflags=
+
+[Tue Sep 17 13:58:28 2024]
+Finished job 0.
+1 of 1 steps (100%) done

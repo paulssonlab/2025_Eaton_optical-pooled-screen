@@ -1,0 +1,20 @@
+name: flowcyto
+channels:
+  - conda-forge
+  - pyviz
+  - bioconda
+dependencies:
+
+  - biopython
+  - black
+  - jupyterlab
+  - matplotlib
+  - nodejs
+  - numpy
+  - pandas
+  - pip
+  - pre-commit
+  - samtools
+  - seaborn
+  - vg
+  - fcsparser

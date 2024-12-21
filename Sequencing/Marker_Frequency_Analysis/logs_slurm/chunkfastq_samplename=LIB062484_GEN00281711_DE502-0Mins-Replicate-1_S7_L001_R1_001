@@ -1,0 +1,20 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	chunkfastq
+	1
+
+[Wed Jun  5 11:21:00 2024]
+rule chunkfastq:
+    input: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_unzipped/LIB062484_GEN00281711_DE502-0Mins-Replicate-1_S7_L001_R1_001.fastq
+    output: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_chunked/LIB062484_GEN00281711_DE502-0Mins-Replicate-1_S7_L001_R1_001
+    jobid: 0
+    wildcards: samplename=LIB062484_GEN00281711_DE502-0Mins-Replicate-1_S7_L001_R1_001
+    resources: partition=short, time_min=10, mem_mb=8000, cpus=1, optflags=
+
+[Wed Jun  5 11:21:05 2024]
+Finished job 0.
+1 of 1 steps (100%) done

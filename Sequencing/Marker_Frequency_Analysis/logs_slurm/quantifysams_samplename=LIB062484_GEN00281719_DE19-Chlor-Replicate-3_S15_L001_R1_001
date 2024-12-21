@@ -1,0 +1,22 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	quantifysams
+	1
+
+[Wed Jun  5 18:55:03 2024]
+rule quantifysams:
+    input: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/testout.txt, /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/alignments/LIB062484_GEN00281719_DE19-Chlor-Replicate-3_S15_L001_R1_001
+    output: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/alignments/LIB062484_GEN00281719_DE19-Chlor-Replicate-3_S15_L001_R1_001.pkl
+    jobid: 0
+    wildcards: samplename=LIB062484_GEN00281719_DE19-Chlor-Replicate-3_S15_L001_R1_001
+    resources: partition=short, time_min=5, mem_mb=2000, cpus=1, optflags=
+
+/home/de64/micromamba/envs/nanopore/lib/python3.10/site-packages/dask/dataframe/_pyarrow_compat.py:17: FutureWarning: Minimal version of pyarrow will soon be increased to 14.0.1. You are using 9.0.0. Please consider upgrading.
+  warnings.warn(
+[Wed Jun  5 18:56:20 2024]
+Finished job 0.
+1 of 1 steps (100%) done

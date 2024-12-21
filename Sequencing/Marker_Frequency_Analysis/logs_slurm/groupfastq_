@@ -1,0 +1,3 @@
+Building DAG of jobs...
+MissingRuleException:
+No rule to produce /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_unzipped (if you use input functions make sure that they don't raise unexpected exceptions).

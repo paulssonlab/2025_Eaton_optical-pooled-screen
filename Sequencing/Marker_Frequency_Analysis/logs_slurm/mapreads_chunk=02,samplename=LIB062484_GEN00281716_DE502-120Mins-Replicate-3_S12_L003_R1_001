@@ -1,0 +1,30 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	mapreads
+	1
+
+[Wed Jun  5 11:56:25 2024]
+rule mapreads:
+    input: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_chunked/LIB062484_GEN00281716_DE502-120Mins-Replicate-3_S12_L003_R1_001/chunk_02.fastq, /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/U00096_3.fasta
+    output: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/alignments/LIB062484_GEN00281716_DE502-120Mins-Replicate-3_S12_L003_R1_001/chunk_02.sam
+    jobid: 0
+    wildcards: samplename=LIB062484_GEN00281716_DE502-120Mins-Replicate-3_S12_L003_R1_001, chunk=02
+    resources: partition=short, time_min=5, mem_mb=2000, cpus=1, optflags=
+
+[M::mm_idx_gen::0.197*1.00] collected minimizers
+[M::mm_idx_gen::0.283*0.99] sorted minimizers
+[M::main::0.283*0.99] loaded/built the index for 1 target sequence(s)
+[M::mm_mapopt_update::0.299*0.99] mid_occ = 12
+[M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 1
+[M::mm_idx_stat::0.310*0.99] distinct minimizers: 838542 (98.18% are singletons); average occurrences: 1.034; average spacing: 5.352; total length: 4641652
+[M::worker_pipeline::21.425*1.00] mapped 1000000 sequences
+[M::main] Version: 2.28-r1209
+[M::main] CMD: minimap2 -ax map-ont /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/U00096_3.fasta /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_chunked/LIB062484_GEN00281716_DE502-120Mins-Replicate-3_S12_L003_R1_001/chunk_02.fastq
+[M::main] Real time: 21.486 sec; CPU: 21.438 sec; Peak RSS: 0.515 GB
+[Wed Jun  5 11:56:49 2024]
+Finished job 0.
+1 of 1 steps (100%) done

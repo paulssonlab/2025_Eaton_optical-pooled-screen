@@ -1,0 +1,104 @@
+import os
+
+SCRATCH_PATH = "/home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/"
+FASTQ_PATH = "/home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/Unaligned_06041_PF_mm1/Data/Project_deaton/"
+REF_PATH = "/home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/U00096_3.fasta"
+
+READ_SETSIZE = 1000000
+READ_SPLITSIZE = int(READ_SETSIZE*4)
+
+if not os.path.exists("./logs_slurm"):
+    os.makedirs("./logs_slurm")
+
+##get sample names
+SAMPLE_LIST = [filename[:-9] for filename in os.listdir(FASTQ_PATH) if filename[-9:]=='.fastq.gz']
+
+## First split unzip the fastq files
+
+#rule all:
+#    input:
+#        samplelist = expand(FASTQ_PATH + "{samplename}.fastq.gz", samplename=SAMPLE_LIST)
+#    output:
+#        SCRATCH_PATH + "logfile.txt"
+#    resources: partition="short", time_min=5, mem_mb=8000, cpus=1, optflags=""
+#    shell:
+#        """
+#        echo {input.samplelist} > {output}
+#        """
+
+rule unzipfastq:
+    input:
+        fastqpath=FASTQ_PATH + "{samplename}.fastq.gz"
+    output:
+        fastqunzippath=SCRATCH_PATH + "fastq_unzipped/{samplename}.fastq"
+    resources: partition="short", time_min=5, mem_mb=8000, cpus=1, optflags=""
+    shell:
+        "gzip -d -c {input.fastqpath} > {output.fastqunzippath}"
+
+rule chunkfastq:
+    input:
+        fastqunzippath = SCRATCH_PATH + "fastq_unzipped/{samplename}.fastq"
+    output:
+        fastqunchunkpath = directory(SCRATCH_PATH + "fastq_chunked/{samplename}")
+    resources: partition="short", time_min=10, mem_mb=8000, cpus=1, optflags=""
+    shell:
+        "mkdir -p {output.fastqunchunkpath}; split -l " + str(READ_SPLITSIZE) + " -d --additional-suffix=.fastq {input.fastqunzippath} {output.fastqunchunkpath}/chunk_"
+
+checkpoint aggchunks:
+    input:
+        chunkedfiles = expand(SCRATCH_PATH + "fastq_chunked/{samplename}",samplename=SAMPLE_LIST)
+    output:
+        chunkeddone = SCRATCH_PATH + "finished_chunking.txt"
+    resources: partition="short", time_min=5, mem_mb=500, cpus=1, optflags=""
+    run:
+        shell_str = "touch " + SCRATCH_PATH + "finished_chunking.txt"
+        shell(shell_str)
+
+rule mapreads:
+    input:
+        fastqunchunk = SCRATCH_PATH + "fastq_chunked/{samplename}/chunk_{chunk}.fastq",
+        refpath = REF_PATH
+    output:
+        alignment = SCRATCH_PATH + "alignments/{samplename}/chunk_{chunk}.sam"
+    resources: partition="short", time_min=5, mem_mb=2000, cpus=1, optflags=""
+    run:
+        mkdirpath = "/".join(output.alignment.split("/")[:-1])
+        shell_str = "mkdir -p " + mkdirpath + "; minimap2 -ax map-ont {input.refpath} {input.fastqunchunk} > {output.alignment}"
+        shell(shell_str)
+
+def agg_sams(wildcards):
+    aggchunks_out = checkpoints.aggchunks.get(**wildcards).output["chunkeddone"]
+    aggchunks_output = SCRATCH_PATH + "fastq_chunked"
+    glob_samplechunks = glob_wildcards(os.path.join(aggchunks_output, "{samplechunk}.fastq")).samplechunk
+    expanded_samfiles = expand(SCRATCH_PATH + "alignments/{samplechunk}.sam",samplechunk=glob_samplechunks)
+    return expanded_samfiles
+
+rule concatsams:
+    input:
+        samfiles = agg_sams
+    output:
+        catalignment = SCRATCH_PATH + "testout.txt"
+    resources: partition="short", time_min=60, mem_mb=500, cpus=1, optflags=""
+    run:
+        shell_str = "touch " + SCRATCH_PATH + "testout.txt"
+        shell(shell_str)
+
+rule quantifysams:
+    input:
+        catalignment = SCRATCH_PATH + "testout.txt",
+        alignmentpath = SCRATCH_PATH + "alignments/{samplename}"
+    output:
+        samquantpath = SCRATCH_PATH + "alignments/{samplename}.pkl"
+    resources: partition="short", time_min=5, mem_mb=2000, cpus=1, optflags=""
+    script:
+        "scripts/aggmapping.py"
+
+checkpoint aggquants:
+    input:
+        samquantpaths = expand(SCRATCH_PATH + "alignments/{samplename}.pkl",samplename=SAMPLE_LIST)
+    output:
+        samquantpathagg = SCRATCH_PATH + "Final_NGS_Mapping.pkl"
+    resources: partition="short", time_min=20, mem_mb=16000, cpus=1, optflags=""
+    script:
+        "scripts/finalagg.py"
+

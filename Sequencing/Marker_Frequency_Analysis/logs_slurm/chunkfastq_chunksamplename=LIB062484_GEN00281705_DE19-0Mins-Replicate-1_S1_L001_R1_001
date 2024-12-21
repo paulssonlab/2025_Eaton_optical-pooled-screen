@@ -1,0 +1,28 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	chunkfastq
+	1
+
+[Tue Jun  4 23:04:23 2024]
+rule chunkfastq:
+    input: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_unzipped/LIB062484_GEN00281705_DE19-0Mins-Replicate-1_S1_L001_R1_001.fastq
+    output: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_chunked/LIB062484_GEN00281705_DE19-0Mins-Replicate-1_S1_L001_R1_001
+    jobid: 0
+    wildcards: chunksamplename=LIB062484_GEN00281705_DE19-0Mins-Replicate-1_S1_L001_R1_001
+    resources: partition=short, time_min=60, mem_mb=8000, cpus=1, optflags=
+
+split: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_chunked/LIB062484_GEN00281705_DE19-0Mins-Replicate-1_S1_L001_R1_001/chunk_00.fastq: No such file or directory
+[Tue Jun  4 23:04:23 2024]
+Error in rule chunkfastq:
+    jobid: 0
+    output: /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_chunked/LIB062484_GEN00281705_DE19-0Mins-Replicate-1_S1_L001_R1_001
+    shell:
+        split -l 4000000 -d --additional-suffix=.fastq /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_unzipped/LIB062484_GEN00281705_DE19-0Mins-Replicate-1_S1_L001_R1_001.fastq /home/de64/scratch/de64/sync_folder/2024-06-04_NGS_Ploidy_Analysis/fastq_chunked/LIB062484_GEN00281705_DE19-0Mins-Replicate-1_S1_L001_R1_001/chunk_
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
