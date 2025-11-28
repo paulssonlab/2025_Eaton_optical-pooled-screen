@@ -29,6 +29,10 @@ dependencies:
   - pandas
   - pip
   - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu116
+      - torch==2.5.1+cu121
+      - torchaudio
+      - torchvision
       - omnipose
       - pulp
       - parse
@@ -36,15 +40,11 @@ dependencies:
   - pyarrow
   - pytables
   - python=3.10.12
-  - pytorch
-  - pytorch-cuda=11.7
   - scikit-image
   - scikit-learn
   - scipy
   - seaborn
   - statsmodels
   - tifffile
-  - torchaudio
-  - torchvision
   - xarray
   - zarr
