@@ -13,7 +13,8 @@ project/
   Example_Raw_Data/
 ```
 
-Example sources:
+File sources:
+- `crispri.sif`: container from Zenodo (`doi:10.5281/zenodo.14537796`) at `/Containers/crispri.sif`
 - `Example_Raw_Data/`: imaging data from Zenodo (`doi:10.5281/zenodo.14537796`)
 - `Example_Analysis_Notebook.ipynb`: from the GitHub repo `paulssonlab/2025_Eaton_optical-pooled-screen`
 
