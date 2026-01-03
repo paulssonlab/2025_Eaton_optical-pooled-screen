@@ -11,3 +11,26 @@ This repository contains analysis code, data processing pipelines, and figures f
 - **Replication_Runout/**: Analysis notebooks for processing deep sequencing and flow cytometry data used to measure replication defects.
 - **Figures/**: Scripts and notebooks to generate manuscript figures.
 - **README.md**: This file.
+
+## Version Text TBD
+
+## Instructions for Reproducing Figures
+
+- Reference the Zonodo archive
+- Find all instances where there is a file in the zenodo referenced and make the path ./zipfolder_name/path/to/file
+- List all instances where raw data that was not deposited is used and say available upon request
+
+## Instructions for Reproducing Agar Pad Analysis
+
+
+## Instructions for Reproducing Mother Machine Analysis
+
+- Have trenchripper and crispri options
+
+## Instructions for Reproducing Library Sequencing
+
+## To-do
+
+- Also make sure to deposit toy data in the zenodo (I'll have to see how to push the version number of the repo)
+- I added the agar pad data and _??_
+- Still need to crop one FOV from a mother machine dataset and test

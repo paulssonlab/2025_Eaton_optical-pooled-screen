@@ -25,11 +25,12 @@ dependencies:
   - matplotlib
   - nd2reader
   - nodejs
-  - numpy
+  - numpy<2
   - pandas
   - pip
   - pip:
-      - --extra-index-url https://download.pytorch.org/whl/cu116
+      - --extra-index-url https://download.pytorch.org/whl/cu121
+      - --no-deps
       - torch==2.5.1+cu121
       - torchaudio
       - torchvision
