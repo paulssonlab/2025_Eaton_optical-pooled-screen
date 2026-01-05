@@ -3,49 +3,72 @@ channels:
   - pytorch
   - nvidia
   - conda-forge
-  - pyviz
-  - bioconda
-  - defaults
+
 dependencies:
-  - black
-  - bokeh
-  - dask
-  - dask-jobqueue
-  - dask-ml
-  - datashader
-  - distributed
-  - fastparquet
-  - h5py
-  - holoviews
-  - hvplot
-  - ipywidgets
-  - jupyterlab
-  - jupyterlab_code_formatter
-  - line_profiler
-  - matplotlib
-  - nd2reader
-  - nodejs
-  - numpy<2
-  - pandas
+  # ---- python ----
+  - python>=3.10,<3.12
   - pip
-  - pip:
-      - --extra-index-url https://download.pytorch.org/whl/cu121
-      - --no-deps
-      - torch==2.5.1+cu121
-      - torchaudio
-      - torchvision
-      - omnipose
-      - pulp
-      - parse
+
+  # ---- formatting / dev ----
+  - black
   - pre-commit
-  - pyarrow
-  - pytables
-  - python=3.10.12
+
+  # ---- jupyter / ux ----
+
+  - jupyterlab
+  - ipywidgets
+  - jupyterlab_code_formatter
+
+  # ---- core scientific stack ----
+  - arch-py
+  - numpy < 2
+  - nd2
+  - nd2reader
+  - scipy < 1.11
+  - pandas
   - scikit-image
   - scikit-learn
-  - scipy
-  - seaborn
   - statsmodels
   - tifffile
+  - h5py
+  - pytables
+  - pyarrow
   - xarray
   - zarr
+
+  # ---- plotting / viz ----
+  - matplotlib
+  - seaborn
+  - bokeh
+  - datashader
+  - hvplot
+  - holoviews
+  - pyviz_comms
+
+  # ---- dask / parallel ----
+  - dask
+  - distributed
+  - dask-ml
+  - dask-jobqueue
+  - fastparquet
+
+  # ---- pytorch + cuda (omnipo se-compatible) ----
+  # - pytorch
+  # - torchvision
+  # - torchaudio
+  # - pytorch-cuda=12.4
+  - pytorch=2.5.*
+  - torchvision=0.20.*
+  - torchaudio=2.5.*
+  - pytorch-cuda=12.4
+  # - cudatoolkit=11.8
+
+  # ---- pip-only deps ----
+  - pip:
+      # must iunstall omnipose and cellpose with no deps
+      # - omnipose
+      # - cellpose
+      - fastremap
+      - natsort
+      - pulp
+      - parse

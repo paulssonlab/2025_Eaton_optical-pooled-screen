@@ -1,0 +1,35 @@
+Bootstrap: docker
+From: mambaorg/micromamba:1.5.8
+
+%files
+    ../repros/repro_crispri/envs/__home__de64__2025_Eaton_optical-pooled-screen__Image_Analysis__environment.yml-conda-explicit.lock /opt/env/conda-explicit.lock
+    ../repros/repro_crispri/envs/__home__de64__2025_Eaton_optical-pooled-screen__Image_Analysis__environment.yml-pip-freeze.txt      /opt/env/pip-freeze.txt
+
+%environment
+    export PATH=/opt/conda/envs/app/bin:$PATH
+    export PYTHONDONTWRITEBYTECODE=1
+    export PYTHONUNBUFFERED=1
+
+%post
+    set -eu
+
+    # Create environment from explicit lockfile
+    micromamba create -y -n app --file /opt/env/conda-explicit.lock
+    micromamba clean --all --yes
+
+    # Optional pip tail
+    if [ -s /opt/env/pip-freeze.txt ]; then
+        /opt/conda/envs/app/bin/python -m pip install --no-cache-dir -r /opt/env/pip-freeze.txt
+    fi
+
+    # Install git (needed for pip VCS installs)
+    apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+    # Install omnipose without touching dependencies
+    /opt/conda/envs/app/bin/python -m pip install --no-deps omnipose cellpose
+    
+    # Install TrenchRipper without touching dependencies
+    /opt/conda/envs/app/bin/python -m pip install --no-deps "git+https://github.com/paulssonlab/TrenchRipper@v1.0.5"
+
+%runscript
+    exec /opt/conda/envs/app/bin/python "$@"
