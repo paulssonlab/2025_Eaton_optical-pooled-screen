@@ -2,6 +2,8 @@
 
 This repository contains analysis code, data processing pipelines, and figures for the MARLIN (Multiplexed Assignment of RNA‐barcoded LINeages) optical pooled screening platform presented in Eaton et al., 2025.
 
+Note that most analyses require the accompanying datasets deposited on Zenodo (`doi:10.5281/zenodo.14537796`).
+
 ## Repository Structure
 
 - **Library_Design/**: Code and protocols for designing the mismatch‐CRISPRi library targeting 585 essential genes with ~29,738 sgRNAs and unique 30-bit FISH barcodes.
@@ -12,8 +14,6 @@ This repository contains analysis code, data processing pipelines, and figures f
 - **Figures/**: Scripts and notebooks to generate manuscript figures.
 - **README.md**: This file.
 
-## Version Text TBD
-
 ## Instructions for Reproducing Figures
 
 - Reference the Zonodo archive
@@ -22,7 +22,7 @@ This repository contains analysis code, data processing pipelines, and figures f
 
 ## Instructions for Reproducing Agar Pad Analysis
 
-To reproduce the agar pad image analysis end-to-end, use the container/setup guide for environment + Jupyter launch, and the example notebook for the full processing workflow. Note that you will also need access to the data deposited at Zonodo (`doi:10.5281/zenodo.14537796`).
+To reproduce the agar pad image analysis end-to-end, use the container/setup guide for environment + Jupyter launch, and the example notebook for the full processing workflow.
 
 - **1) Set up the analysis environment + launch Jupyter**
   - Follow `containers/agarpad_instructions.md` to install Apptainer, place the container + notebook + example data in a single working directory, and start JupyterLab from inside the container.
@@ -50,8 +50,13 @@ To reproduce the mother-machine analysis end-to-end, use the container/setup gui
 
 ## Instructions for Reproducing Library Sequencing
 
-## To-do
+Raw Nanopore and NGS sequencing reads are available via NCBI BioProject **PRJNA1205775**.
 
-- Also make sure to deposit toy data in the zenodo (I'll have to see how to push the version number of the repo)
-- I added the agar pad data and _??_
-- Still need to crop one FOV from a mother machine dataset and test
+Nanopore processing for this study is provided as a **Snakemake** pipeline in `sequencing/`. The workflow takes raw FAST5 files through basecalling and barcode assignment to produce a final **barcode → consensus/reference** table (`output.tsv`), with an accompanying QC/export notebook.
+
+At a high level, the workflow chunks FAST5 files, basecalls with Guppy, aligns reads to the barcode graph (GraphAligner), assigns/group reads by barcode, calls per-barcode consensus sequences (Medaka), and writes a merged `output.tsv` suitable for downstream mapping/QC.
+
+For example, to reproduce the analysis for `lDE26`:
+- See `Sequencing/README.md` for an overview, required inputs, and an example SLURM Snakemake command.
+- Use `Sequencing/lDE26/lDE26_Sequencing.smk` + `Sequencing/lDE26/configs/` + `Sequencing/lDE26/reference_sequences/` to run the pipeline.
+- Use `Sequencing/lDE26/Barcode_QC_and_Export.ipynb` for QC and exporting summary tables.

@@ -20,7 +20,7 @@ Raw sequencing reads for Nanopore and NGS libraries have been deposited in the N
   Run-specific YAML configuration files (e.g., paths to input FAST5, scratch/output locations, flowcell/kit settings, chunk sizes, read-length filters, barcode depth thresholds, and subsampling settings).
 
 - `reference_sequences/`  
-  Reference sequence assets for alignment/interpretation. For `lDE26`, the key input is a **GFA graph** used by GraphAligner.
+  Reference sequence assets for alignment. For `lDE26`, the key input is a **GFA graph** used by GraphAligner.
 
 - `scripts/`  
   Small Python utilities called by Snakemake rules/checkpoints.
@@ -40,9 +40,37 @@ Raw sequencing reads for Nanopore and NGS libraries have been deposited in the N
 1. Edit the config file in `configs/` (paths + run parameters).
 2. Run Snakemake with your preferred execution mode (local or cluster profile). For cluster usage, use the provided Snakemake profile under `profiles/`.
 
+The typical command to run this pipeline on `SLURM` is:
+
+`snakemake -s lDE26_Sequencing.smk --profile profiles/slurm aggregate_outputs scratch_path/output.tsv`
+
 After the workflow completes, the main product is the merged `output.tsv` written under the configured `scratch_path`.
 
-### What the Snakemake pipeline does
+### Required starting inputs
+
+For each pipeline, you must define in the config file:
+
+- **Raw Nanopore input**
+  - `fast5_path`: A directory containing the input **`.fast5`** files.
+
+- **Reference graph**
+  - `ref_gfa_path`: The **`.gfa`** file used by GraphAligner.
+
+- **Writable scratch/output location**
+  - `scratch_path`: A directory path that **must already exist** and be writable.
+
+- **Run parameters**
+  - `flowcell`, `kit`: Guppy basecalling settings specifying the nanopore **flowcell type** and **sequencing kit** used for the run.
+  - `fast5_chunksize`: Number of FAST5 files to group into each chunk for parallel basecalling.
+  - `read_setsize`: Number of reads per “readset” FASTQ produced after filtering; used to split the full FASTQ stream into manageable batches for downstream alignment/barcode calling.
+  - `min_readlength`, `max_readlength`: Read-length bounds used to filter basecalled reads before barcode calling.
+  - `chunk_size`: Number of barcode groups to bundle for parallel per-barcode consensus calling (Medaka) and alignment.
+  - `depth_threshold`: Minimum number of reads required for a barcode to be retained for grouping/consensus (filters out low-support barcodes).
+  - `n_subsamples`: Number of per-barcode subsampling replicates to generate; should usually be set to `0` to indicate “no subsampling / use all reads”.
+
+---
+
+## What the Snakemake pipeline does
 
 The `lDE26_Sequencing.smk` workflow takes raw nanopore **FAST5** and produces a final merged table (`output.tsv`) that, for each observed barcode group, includes:
 - The called **barcode** (as a bitstring),
