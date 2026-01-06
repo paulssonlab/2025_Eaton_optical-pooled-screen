@@ -1,3 +1,5 @@
+## use flexible solve: mamba env create -f environment.yml --channel-priority flexible
+
 name: agarpad
 channels:
   - pytorch
@@ -21,18 +23,26 @@ dependencies:
 
   # ---- core scientific stack ----
   - arch-py
-  - numpy < 2
-  - nd2
+  # - edt
+  # - igraph
+  # - python-igraph
+  # - mahotas
   - nd2reader
-  - scipy < 1.11
+  - numpy>2
+  - scipy
   - pandas
   - scikit-image
   - scikit-learn
   - statsmodels
+  # - segment-anything
+  # - texttable
   - tifffile
   - h5py
+  # - imagecodecs
+  # - opencv
   - pytables
   - pyarrow
+  # - roifile
   - xarray
   - zarr
 
@@ -43,6 +53,7 @@ dependencies:
   - datashader
   - hvplot
   - holoviews
+  # - pbr
   - pyviz_comms
 
   # ---- dask / parallel ----
@@ -65,10 +76,16 @@ dependencies:
 
   # ---- pip-only deps ----
   - pip:
-      # must iunstall omnipose and cellpose with no deps
-      # - omnipose
-      # - cellpose
+      - omnipose==1.0.6
+      - cellpose==2.3.2
       - fastremap
+      # - mgen
       - natsort
+      - nd2
+      # - ncolor
       - pulp
       - parse
+      - "peakdetect @ git+https://github.com/erdogant/peakdetect.git@67d03304dfea5a33cd22f4e0990bee058bcdea0a" # contains scipy fix
+
+      # - peakdetect
+      # - torchvf

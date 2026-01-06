@@ -15,4 +15,4 @@ This repo uses **micromamba/conda** environments. For each environment YAML in t
 
 | Env YAML path | Conda env name | Exports |
 |---|---:|---|
-| `/home/de64/2025_Eaton_optical-pooled-screen/Image_Analysis/environment.yml` | `crispri` | repro/envs/crispri_environment-conda-env-export.yml<br>repro/envs/crispri_environment-conda-list.txt<br>repro/envs/crispri_environment-conda-explicit.lock<br>repro/envs/crispri_environment-pip-freeze.txt |
+| `./Library_Design/environment.yml` | `marlin_libraries` | repro/envs/marlin_libraries_environment-conda-env-export.yml<br>repro/envs/marlin_libraries_environment-conda-list.txt<br>repro/envs/marlin_libraries_environment-conda-explicit.lock<br>repro/envs/marlin_libraries_environment-pip-freeze.txt |

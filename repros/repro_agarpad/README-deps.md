@@ -15,4 +15,4 @@ This repo uses **micromamba/conda** environments. For each environment YAML in t
 
 | Env YAML path | Conda env name | Exports |
 |---|---:|---|
-| `/home/de64/2025_Eaton_optical-pooled-screen/Image_Analysis/environment.yml` | `crispri` | repro/envs/crispri_environment-conda-env-export.yml<br>repro/envs/crispri_environment-conda-list.txt<br>repro/envs/crispri_environment-conda-explicit.lock<br>repro/envs/crispri_environment-pip-freeze.txt |
+| `./Agar_Pad_Image_Analysis/environment.yml` | `agarpad` | repro/envs/agarpad_environment-conda-env-export.yml<br>repro/envs/agarpad_environment-conda-list.txt<br>repro/envs/agarpad_environment-conda-explicit.lock<br>repro/envs/agarpad_environment-pip-freeze.txt |

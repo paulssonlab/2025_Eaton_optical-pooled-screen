@@ -2,8 +2,8 @@ Bootstrap: docker
 From: mambaorg/micromamba:1.5.8
 
 %files
-    ../repros/repro_crispri/envs/__home__de64__2025_Eaton_optical-pooled-screen__Image_Analysis__environment.yml-conda-explicit.lock /opt/env/conda-explicit.lock
-    ../repros/repro_crispri/envs/__home__de64__2025_Eaton_optical-pooled-screen__Image_Analysis__environment.yml-pip-freeze.txt      /opt/env/pip-freeze.txt
+    ../repros/repro_crispri/envs/crispri_environment-conda-explicit.lock /opt/env/conda-explicit.lock
+    ../repros/repro_crispri/envs/crispri_environment-pip-freeze.txt      /opt/env/pip-freeze.txt
 
 %environment
     export PATH=/opt/conda/envs/app/bin:$PATH
@@ -26,7 +26,7 @@ From: mambaorg/micromamba:1.5.8
     apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
     # Install TrenchRipper without touching dependencies
-    /opt/conda/envs/app/bin/python -m pip install --no-deps "git+https://github.com/paulssonlab/TrenchRipper@v1.0.5"
+    /opt/conda/envs/app/bin/python -m pip install --no-deps "git+https://github.com/paulssonlab/TrenchRipper@v1.0.6"
 
 %runscript
     exec /opt/conda/envs/app/bin/python "$@"
