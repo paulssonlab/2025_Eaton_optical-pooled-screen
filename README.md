@@ -6,28 +6,39 @@ Note that most analyses require the accompanying datasets deposited on Zenodo (`
 
 ## Repository Structure
 
-- **Library_Design/**: Code and protocols for designing the mismatch‐CRISPRi library targeting 585 essential genes with ~29,738 sgRNAs and unique 30-bit FISH barcodes.
-- **Agar_Pad_Image_Analysis/**: Jupyter notebooks and scripts for segmenting and extracting timelapse phenotypes (length, width, growth rate, etc) from agar pad images.
-- **Image_Analysis/**: Custom pipelines for analyzing MARLIN imaging data including decoding combinatorial FISH barcodes and high throughput segmentation/tracking of mother machine data. 
-- **Sequencing/**: Scripts for processing nanopore sequencing data for MARLIN libraries.
-- **Replication_Runout/**: Analysis notebooks for processing deep sequencing and flow cytometry data used to measure replication defects.
-- **Figures/**: Scripts and notebooks to generate manuscript figures.
-- **README.md**: This file.
+- `Library_Design/` — Library design resources (e.g., sgRNA/barcode design and related analysis/code).
+- `Agar_Pad_Image_Analysis/` — Notebooks/scripts for agar pad analysis (segmentation, phenotype extraction, downstream summaries).
+- `Image_Analysis/` — Mother machine + optical pooled imaging analysis workflows (segmentation/tracking, barcode/FISH decoding, dataset-specific notebooks).
+- `Sequencing/` — Sequencing processing and analysis for MARLIN libraries (e.g., nanopore and related summary outputs).
+- `Replication_Runout/` — Notebooks for replication runout measurements and downstream analysis (e.g., deep sequencing / flow cytometry–based analyses).
+- `Figures/` — Figure-generation notebooks and scripts (Figures 1–7; Extended Data Figs. 1–13), typically run against processed outputs from the Zenodo deposit.
+- `containers/` — Apptainer/Singularity definitions and usage notes for reproducible execution of key analysis environments.
+- `repros/` — Reproducibility helpers (e.g., dependency manifests/lockfiles and environment exports used to recreate analysis environments).
+- `scripts/` — Small utility script to generate contents of `repros/`.
+- `README.md` — This file.
 
+  
 ## Instructions for Reproducing Figures
 
-- Reference the Zonodo archive
-- Find all instances where there is a file in the zenodo referenced and make the path ./zipfolder_name/path/to/file
-- List all instances where raw data that was not deposited is used and say available upon request
+Manuscript figures (**Figs. 1–7** and **Extended Data Figs. 1–13**) are generated primarily from the Jupyter notebooks in `Figures/`, using processed tables and intermediate outputs deposited on Zenodo.
+
+1. **Get the processed data**
+   - Download the Zenodo deposit and unzip it locally.
+   - Most figure notebooks expect to read *processed* outputs (feature tables, decoded barcode calls, summary statistics, etc.) from this archive.
+
+2. **Run the figure notebooks**
+   - Open the relevant notebooks in `Figures/` (typically organized by figure / panel).
+   - Update the data root/path variables at the top of each notebook to point to your unzipped Zenodo folder.
+   - Execute the notebook to regenerate the plots/panels; outputs are written to the figure output locations defined in each notebook.
 
 ## Instructions for Reproducing Agar Pad Analysis
 
 To reproduce the agar pad image analysis end-to-end, use the container/setup guide for environment + Jupyter launch, and the example notebook for the full processing workflow.
 
-- **1) Set up the analysis environment + launch Jupyter**
+- **1) Set up the environment + launch Jupyter**
   - Follow `containers/agarpad_instructions.md` to install Apptainer, place the container + notebook + example data in a single working directory, and start JupyterLab from inside the container.
 
-- **2) Run the example workflow notebook**
+- **2) Run the example notebook**
   - Open `Agar_Pad_Image_Analysis/Example_Analysis/Example_Analysis_Notebook.ipynb` and execute top-to-bottom.
   - You will (i) point the notebook at the example dataset (e.g., `./Example_Raw_Data/Agar_Pad`), and choose **local vs SLURM** execution (via `analysis_is_local` and `dask_workingdir`).
   - The notebook then performs:
@@ -42,11 +53,11 @@ To reproduce the agar pad image analysis end-to-end, use the container/setup gui
 To reproduce the mother-machine analysis end-to-end, use the container/setup guide to launch Jupyter in a reproducible environment, then run the example notebook to execute the full TrenchRipper workflow.
 
 - **1) Set up the environment + launch Jupyter**
-  - Follow the container instructions to install Apptainer, organize your working directory (container + notebooks + example data), and start JupyterLab from inside the container.
+  - Follow `containers/crispri_instructions.md` to install Apptainer, place the container + notebook + example data in a single working directory, and start JupyterLab from inside the container.
 
-- **2) Run the example mother-machine workflow notebook**
+- **2) Run the example notebook**
   - Open `Image_Analysis/Example_Analysis/Example_Analysis_Notebook.ipynb` and execute top-to-bottom (or use the interactive variant at `Image_Analysis/Example_Analysis/Example_Analysis_Notebook_Interactive.ipynb` if you want to tune parameters).
-  - The notebook walks through the standard mother-machine pipeline, including file extraction/preprocessing, trench detection/cropping, lineage/kymograph generation, segmentation + tracking, downstream quantification, and exporting final analysis tables/outputs back into the experiment folder.
+  - The notebook walks through the standard mother machine pipeline, including file extraction/preprocessing, trench detection/cropping, lineage/kymograph generation, segmentation + tracking, downstream quantification, and exporting final analysis tables/outputs back into the experiment folder.
 
 ## Instructions for Reproducing Library Sequencing
 
