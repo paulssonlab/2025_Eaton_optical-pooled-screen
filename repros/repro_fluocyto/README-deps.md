@@ -9,10 +9,10 @@ This repo uses **micromamba/conda** environments. For each environment YAML in t
 
 ### Operating system / platform
 
-- Platform details: `repros/repro_crispri/platform.txt`
+- Platform details: `repros/repro_fluocyto/platform.txt`
 
 ### Environments discovered in subdirectories
 
 | Env YAML path | Conda env name | Exports |
 |---|---:|---|
-| `./Image_Analysis/environment.yml` | `crispri` | ./repros/repro_crispri/envs/crispri_environment-conda-env-export.yml<br>./repros/repro_crispri/envs/crispri_environment-conda-list.txt<br>./repros/repro_crispri/envs/crispri_environment-conda-explicit.lock<br>./repros/repro_crispri/envs/crispri_environment-pip-freeze.txt |
+| `./Replication_Runout/environment.yml` | `flowcyto` | ./repros/repro_fluocyto/envs/flowcyto_environment-conda-env-export.yml<br>./repros/repro_fluocyto/envs/flowcyto_environment-conda-list.txt<br>./repros/repro_fluocyto/envs/flowcyto_environment-conda-explicit.lock<br>./repros/repro_fluocyto/envs/flowcyto_environment-pip-freeze.txt |
