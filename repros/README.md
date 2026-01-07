@@ -7,6 +7,17 @@ This repo uses **micromamba/conda** environments. For each environment YAML in t
 - Explicit lockfile (fully pinned, rebuildable): `*-conda-explicit.lock`
 - pip freeze (if pip is present): `*-pip-freeze.txt`
 
+### To recreate these environments using `conda/mamba`
+
+Install `conda` or `mamba` on your command line, as well as `pip`, then recreate any environment using the **explicit lockfile** (most reproducible):
+
+For example for the `crispri` environment:
+```
+mamba create -f repros/repro_crispri/envs/crispri_environment-conda-explicit.lock
+pip install -r repros/repro_crispri/envs/crispri_environment-pip-freeze.txt
+mamba activate crispri
+```
+
 ### Operating system / platform
 
 - Platform details: `repros/platform.txt`

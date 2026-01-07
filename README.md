@@ -17,7 +17,12 @@ Note that most analyses require the accompanying datasets deposited on Zenodo (`
 - `scripts/` — Small utility script to generate contents of `repros/`.
 - `README.md` — This file.
 
-  
+## Installation Instructions
+
+Installation instructions for all relevant python environments can be found at `repros/README.md`
+
+Additionally instructions for using containers made through `Apptainer` can be found at `containers/crispri_instructions.md` and `containers/agarpad_instructions.md`, for the `Image_Analysis/` and `Agar_Pad_Image_Analysis/` environments, respectively.
+
 ## Instructions for Reproducing Figures
 
 Manuscript figures (**Figs. 1–7** and **Extended Data Figs. 1–13**) are generated primarily from the Jupyter notebooks in `Figures/`, using processed tables and intermediate outputs deposited on Zenodo.
