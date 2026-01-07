@@ -25,8 +25,8 @@ project/
 ```
 
 File sources:
-- `crispri.sif`: container from Zenodo (`doi:10.5281/zenodo.14537796`) at `/Containers/crispri.sif`
-- `Example_Raw_Data/`: imaging data from Zenodo (`doi:10.5281/zenodo.14537796`)
+- `crispri.sif`: container from Zenodo (`doi:10.5281/zenodo.14537795`) at `/Containers/crispri.sif`
+- `Example_Raw_Data/`: imaging data from Zenodo (`doi:10.5281/zenodo.14537795`)
 - `Example_Analysis_Notebook.ipynb` and `Example_Analysis_Notebook_Interactive.ipynb`: from the GitHub repo `paulssonlab/2025_Eaton_optical-pooled-screen` at `/Image_Analysis/Example_Analysis`
 
 ### Run JupyterLab from the container

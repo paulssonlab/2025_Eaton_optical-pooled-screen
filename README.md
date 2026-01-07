@@ -2,7 +2,7 @@
 
 This repository contains analysis code, data processing pipelines, and figures for the MARLIN (Multiplexed Assignment of RNA‐barcoded LINeages) optical pooled screening platform presented in Eaton et al., 2025.
 
-Note that most analyses require the accompanying datasets deposited on Zenodo (`doi:10.5281/zenodo.14537796`).
+Note that most analyses require the accompanying datasets deposited on Zenodo (`doi:10.5281/zenodo.14537795`).
 
 ## Repository Structure
 
