@@ -41,7 +41,7 @@ Manuscript figures (**Figs. 1–7** and **Extended Data Figs. 1–13**) are gene
 To reproduce the agar pad image analysis end-to-end, use the container/setup guide for environment + Jupyter launch, and the example notebook for the full processing workflow.
 
 1. **Set up the environment + launch Jupyter**
-  - Follow `containers/agarpad_instructions.md` to install Apptainer, place the container + notebook + example data in a single working directory, and start JupyterLab from inside the container.
+    - Follow `containers/agarpad_instructions.md` to install Apptainer, place the container + notebook + example data in a single working directory, and start JupyterLab from inside the container.
 
 2. **Run the example notebook**
     - Open `Agar_Pad_Image_Analysis/Example_Analysis/Example_Analysis_Notebook.ipynb` and execute top-to-bottom.
